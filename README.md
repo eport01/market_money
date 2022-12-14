@@ -105,7 +105,7 @@ Notes:
 
 Request:
 ```
-api/v0/markets?name=Pearl
+api/v0/markets/search?name=Pearl
 ```
 
 Example Response:
