@@ -53,4 +53,12 @@ describe "Markets API endpoints" do
     end
 
   end
+
+  describe 'api/v1/markets/search?name=market.name' do 
+    it 'get all markets by name, city, state, or zip' do 
+      market = create(:market)
+      get "api/v0/markets/search?name=#{market.name}"
+      
+    end
+  end
 end

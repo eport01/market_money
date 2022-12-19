@@ -14,4 +14,8 @@ class Api::V1::MarketsController < ApplicationController
       render json: {error: "no market id"}, status: 404
     end
   end
+
+  def search 
+    
+  end
 end
