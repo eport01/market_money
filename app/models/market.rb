@@ -5,14 +5,14 @@ class Market < ApplicationRecord
   end
 
   def self.find_by_city(city)
-    Market.where("city ILIKE ?", "%#{city}%")
+    Market.where("city ILIKE ?", "%#{city}%")[0]
   end
 
   def self.find_by_state(state)
-    Market.where("state ILIKE ?", "%#{state}%")
+    Market.where("state ILIKE ?", "%#{state}%")[0]
   end
 
   def self.find_by_zip(zip)
-    Market.where("zip ILIKE ?", "%#{zip}%")
+    Market.where("zip ILIKE ?", "%#{zip}%")[0]
   end
 end 
