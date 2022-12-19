@@ -29,13 +29,18 @@ describe "Markets API endpoints" do
 
   describe 'api/v1/markets/market_id' do 
     it 'get one market by id' do 
-      market_id = create(:market).fmid 
+      market = create(:market) 
 
-      get "/api/v1/markets/#{market_id}"
+      get "/api/v1/markets/#{market.fmid}"
 
-      market = JSON.parse(response.body, symbolize_names: true)[:data]
+      market_response = JSON.parse(response.body, symbolize_names: true)[:data]
 
-      # require 'pry'; binding.pry
+      expect(response).to be_successful
+
+      expect(market_response[0][:attributes][:fmid]).to eq(market.fmid)
+      expect(market_response[0][:attributes][:name]).to eq(market.name)
+
+
     end
   end
 end
