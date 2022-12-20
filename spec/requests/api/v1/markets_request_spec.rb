@@ -67,12 +67,15 @@ describe "Markets API endpoints" do
 
     it 'get all markets by partial caseinsensitive name' do 
       market = create(:market, name: "Pearl")
+      market2 = create(:market, name: "Addie")
 
       get "/api/v1/markets/search?name=pe"
       market_response = JSON.parse(response.body, symbolize_names: true)[:data]
 
       expect(response).to be_successful
       expect(market_response[0][:attributes][:name]).to eq(market.name)
+      expect(market_response[0][:attributes][:name]).to_not eq(market2.name)
+
     end
 
     it 'get all markets by city' do 
