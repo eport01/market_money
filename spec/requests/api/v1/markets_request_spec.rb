@@ -99,7 +99,6 @@ describe "Markets API endpoints" do
       expect(response).to be_successful
       expect(market_response[0][:attributes][:zip]).to eq(market.zip)
       expect(market_response[0][:attributes][:name]).to eq(market.name)
-
     end
 
 
