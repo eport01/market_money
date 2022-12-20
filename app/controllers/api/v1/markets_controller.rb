@@ -22,6 +22,12 @@ class Api::V1::MarketsController < ApplicationController
     if params[:city]
       self.market_by_city(params[:city])
     end
+    if params[:state]
+      self.market_by_state(params[:state])
+    end
+    if params[:zip]
+      self.market_by_zip(params[:zip])
+    end
 
 
   end
@@ -40,6 +46,16 @@ class Api::V1::MarketsController < ApplicationController
 
   def market_by_city(params)
     markets = Market.find_by_city(params)
+    return_markets(markets)
+  end
+
+  def market_by_state(params)
+    markets = Market.find_by_state(params)
+    return_markets(markets)
+  end
+
+  def market_by_zip(params)
+    markets = Market.find_by_zip(params)
     return_markets(markets)
   end
 

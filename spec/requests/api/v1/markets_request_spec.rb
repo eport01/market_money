@@ -73,6 +73,24 @@ describe "Markets API endpoints" do
       expect(market_response[:attributes][:city]).to eq(market.city)
     end
 
+    it 'get all markets by state' do 
+      market = create(:market, state: "CO")
+      get "/api/v1/markets/search?state=CO"
+      market_response = JSON.parse(response.body, symbolize_names: true)[:data]
+
+      expect(response).to be_successful
+      expect(market_response[:attributes][:state]).to eq(market.state)
+    end
+
+    it 'get all markets by zip' do 
+      market = create(:market, zip: "12345")
+      get "/api/v1/markets/search?zip=12345"
+      market_response = JSON.parse(response.body, symbolize_names: true)[:data]
+
+      expect(response).to be_successful
+      expect(market_response[:attributes][:zip]).to eq(market.zip)
+    end
+
 
   end
 end
