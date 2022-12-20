@@ -110,8 +110,8 @@ describe "Markets API endpoints" do
     it 'search cant be blank' do 
       get "/api/v1/markets/search?"
       expect(response).to have_http_status 404
-
-
+      error = JSON.parse(response.body, symbolize_names: true)[:error]
+      expect(error).to eq("you must suppy at least one search parameter")
     end
 
 
