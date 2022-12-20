@@ -23,7 +23,6 @@ class Api::V1::MarketsController < ApplicationController
 
     else
       render json: {error: "no market found"}, status: 404
-
     end
   end
 

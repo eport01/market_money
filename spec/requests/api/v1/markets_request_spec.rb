@@ -92,15 +92,15 @@ describe "Markets API endpoints" do
       expect(market_response[0][:attributes][:zip]).to eq(market.zip)
     end
 
-    # it 'get all markets by multiple params' do 
-    #   market = create(:market, name: "Sams", zip: "12345")
-    #   get "/api/v1/markets/search?name=Sams&zip=12345"
-    #   market_response = JSON.parse(response.body, symbolize_names: true)[:data]
-    #   expect(response).to be_successful
-    #   expect(market_response[:attributes][:zip]).to eq(market.zip)
-    #   expect(market_response[:attributes][:name]).to eq(market.name)
+    it 'get all markets by multiple params' do 
+      market = create(:market, name: "Sams", zip: "12345")
+      get "/api/v1/markets/search?name=Sams&zip=12345"
+      market_response = JSON.parse(response.body, symbolize_names: true)[:data]
+      expect(response).to be_successful
+      expect(market_response[0][:attributes][:zip]).to eq(market.zip)
+      expect(market_response[0][:attributes][:name]).to eq(market.name)
 
-    # end
+    end
 
 
   end
