@@ -6,35 +6,21 @@ RSpec.describe Market, type: :model do
       pearl = create(:market, name: "Pearl")
       jims = create(:market, name: "Jim's")
 
-      expect(Market.find_by_name("Pearl")).to eq(pearl)
-      expect(Market.find_by_name("Pearl")).to_not eq(jims)
+      expect(Market.search("Pearl", '', '', '')[0]).to eq(pearl)
+      expect(Market.search("Pearl", '', '', '')[0]).to_not eq(jims)
 
     end
 
-    it 'can find a market by city' do 
-      pearl = create(:market, city: "Denver")
-      jims = create(:market, city: "Minneapolis")
+    it 'can find a market by a combination of params' do
+      pearl = create(:market, name: "Pearl", state: "CO", city: "Denver")
+      jims = create(:market, name: "Jim's", state: "CO", city: "Aurora")
+      kroger = create(:market, name: "Kroger", state: "OR", city: "Bend")
 
-      expect(Market.find_by_city("Minneapolis")).to eq(jims)
-      expect(Market.find_by_city("Minneapolis")).to_not eq(pearl)
+      expect(Market.search("Pearl", '', "CO", '')[0]).to eq(pearl)
+      expect(Market.search("", '', "CO", '')).to eq([pearl, jims])
+      expect(Market.search("Kroger", 'Bend', "OR", '')).to eq([kroger])
 
     end
-
-    it 'can find a market by state' do 
-      pearl = create(:market, state: "CO")
-      jims = create(:market, state: "MN")
-
-      expect(Market.find_by_state("CO")).to eq(pearl)
-      expect(Market.find_by_state("cCO")).to_not eq(jims)
-    end
-
-
-    it 'can find a market by zip' do 
-      pearl = create(:market, zip: 12345)
-      jims = create(:market, zip: 54321)
-
-      expect(Market.find_by_zip(12345)).to eq(pearl)
-      expect(Market.find_by_zip(12345)).to_not eq(jims)
-    end
+    
   end
 end
