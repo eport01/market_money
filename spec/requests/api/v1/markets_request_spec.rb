@@ -85,11 +85,15 @@ describe "Markets API endpoints" do
 
     it 'get all markets by zip' do 
       market = create(:market, zip: "12345")
+      market2 = create(:market, zip: "54321")
+
       get "/api/v1/markets/search?zip=12345"
       market_response = JSON.parse(response.body, symbolize_names: true)[:data]
 
       expect(response).to be_successful
       expect(market_response[0][:attributes][:zip]).to eq(market.zip)
+      expect(market_response[0][:attributes][:zip]).to_not eq(market2.zip)
+
     end
 
     it 'get all markets by multiple params' do 
@@ -101,6 +105,12 @@ describe "Markets API endpoints" do
       expect(market_response[0][:attributes][:zip]).to eq(market.zip)
       expect(market_response[0][:attributes][:name]).to eq(market.name)
       expect(market_response[0][:attributes][:name]).to_not eq(market2.name)
+    end
+
+    it 'search cant be blank' do 
+      get "/api/v1/markets/search?"
+      expect(response).to have_http_status 404
+
 
     end
 

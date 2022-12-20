@@ -19,6 +19,8 @@ class Api::V1::MarketsController < ApplicationController
     if params[:name] || params[:city] || params[:state] || params[:zip]
       markets = Market.search(params[:name], params[:city], params[:state], params[:zip])
       render json: MarketSerializer.new(markets)
+    else
+      render json: {error: "you must suppy at least one search parameter"}, status: 404
     end
   end
 
