@@ -113,6 +113,14 @@ describe "Markets API endpoints" do
       error = JSON.parse(response.body, symbolize_names: true)[:error]
       expect(error).to eq("you must suppy at least one search parameter")
     end
+    it 'returns empty array for data if no results are found' do 
+      get "/api/v1/markets/search?name=addie"
+      data = JSON.parse(response.body, symbolize_names: true)[:data]
+      expect(data).to eq([])
+
+
+    end
+
 
 
   end

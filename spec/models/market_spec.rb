@@ -21,6 +21,15 @@ RSpec.describe Market, type: :model do
       expect(Market.search("Kroger", 'Bend', "OR", '')).to eq([kroger])
 
     end
+
+    it 'if no results, an empty array is returned' do 
+      pearl = create(:market, name: "Pearl", state: "CO", city: "Denver")
+      jims = create(:market, name: "Jim's", state: "CO", city: "Aurora")
+      kroger = create(:market, name: "Kroger", state: "OR", city: "Bend")
+
+      expect(Market.search("addie", '', "", '')).to eq([])
+
+    end
     
   end
 end
