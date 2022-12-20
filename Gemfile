@@ -37,6 +37,7 @@ group :development, :test do
   gem 'jsonapi-serializer'
   gem 'factory_bot_rails'
   gem 'faker'
+  gem 'pg_search'
 end
 
 group :development do

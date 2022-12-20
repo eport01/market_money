@@ -1,4 +1,13 @@
 class Market < ApplicationRecord
+  include PgSearch::Model 
+
+  pg_search_scope :global_search,
+    against: [:name, :city, :state, :zip],
+    using: {
+      tsearch: {prefix: true }
+    }
+
+
 
   def self.find_by_name(name)
     Market.where("name ILIKE ?", "%#{name}%")[0]
