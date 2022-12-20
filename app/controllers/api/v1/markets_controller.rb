@@ -19,17 +19,29 @@ class Api::V1::MarketsController < ApplicationController
     if params[:name]
       self.market_by_name(params[:name])
     end
+    if params[:city]
+      self.market_by_city(params[:city])
+    end
 
 
   end
 
   private 
-  def market_by_name(params)
-    markets = Market.find_by_name(params)
+
+  def return_markets(markets)
     if markets != nil || markets != []
       render json: MarketSerializer.new(markets)
     end
   end
+  def market_by_name(params)
+    markets = Market.find_by_name(params)
+    return_markets(markets)
+  end
 
-  
+  def market_by_city(params)
+    markets = Market.find_by_city(params)
+    return_markets(markets)
+  end
+
+
 end
