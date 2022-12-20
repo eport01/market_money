@@ -30,4 +30,6 @@ class Api::V1::MarketsController < ApplicationController
       render json: MarketSerializer.new(markets)
     end
   end
+
+  
 end
